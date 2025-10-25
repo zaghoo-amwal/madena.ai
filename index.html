@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Madena AI — Arabic Alignment Lab</title>
+    <meta name="description" content="Data & Models for the Arabic Internet — Madena AI" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-white text-gray-900 flex flex-col">
+    <header class="sticky top-0 z-20 backdrop-blur bg-white/70 border-b border-slate-200">
+      <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-xl bg-black text-white grid place-items-center font-bold">م</div>
+          <span class="font-semibold tracking-tight text-xl">Madena AI</span>
+          <span class="ml-2 rounded-full bg-slate-100 text-slate-700 px-2.5 py-1 text-[0.6rem] md:text-xs">Arabic Alignment Lab</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a class="inline-flex items-center justify-center rounded-xl bg-black text-white px-4 py-2 text-sm font-medium hover:opacity-90" href="mailto:partnerships@madena.ai">Work with us</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <section class="mx-auto max-w-7xl px-6 pt-16 pb-10 md:pt-24 md:pb-12">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">Data & Models for the Arabic Internet</h1>
+        <p class="mt-5 text-lg md:text-xl text-gray-700 max-w-2xl">Building the next generation of Arabic datasets, reward models, and evaluations—so AGI understands the people who speak it.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="inline-flex items-center rounded-2xl bg-black text-white px-5 py-3 text-sm md:text-base font-medium hover:opacity-90" href="mailto:partnerships@madena.ai">Get in touch</a>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-4xl px-6 pb-12 md:pb-16">
+        <div class="text-base text-gray-800">
+          <p>The Arabic language is a living testament to the human imagination. It is the official language for 500 M people, and a medium for spiritual, theological and legal inspirations for more than 1.5 Bn people.</p>
+          <p class="mt-6">Its script inspired, and still adorns, some of the world’s greatest architectural marvels such as Taj Mahal and Alhambra palace, all while preserving the words of Rumi, Hafez and Gibran. A tongue for mystics, scholars, and a script with calligraphic beauty and precision.</p>
+          <p class="mt-6">Yet in the race to develop universal AGI, its datasets are the one of the most lacking and currently trivialized. Madena AI bridges this gap, employing physicists, computer scientists, linguists and lawyers from a diverse background of native arabic speakers to develop the next generation data, evaluations and models for arabic.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white/60">
+      <div class="mx-auto max-w-7xl px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="h-8 w-8 rounded-lg bg-black text-white grid place-items-center font-bold">م</div>
+          <span class="text-sm text-gray-600">© <span id="year"></span> Madena AI — Arabic Alignment Lab</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
