@@ -1,0 +1,19 @@
+# Madena AI
+
+> An Arabic alignment lab developing Arabic datasets, legal AI evaluations, and reinforcement learning tasks.
+
+## Website
+- [Madena AI](https://madena.ai/): Focus areas, research, and partnerships.
+
+## Research
+- [Saudi legal AI evaluation](https://madena.ai/saudi-law-eval.html): A closed-book study of four models on 79 Najiz questions. Includes methods, examples, and limitations; results should not be generalized beyond the reported evaluation.
+- [Arabic legal reward reliability](https://madena.ai/arabic-legal-rewards.html): Verifier validation and expert rubric sensitivity, with a small held-out test and explicit limits on reproducibility.
+
+## Public research repositories
+- [Najiz evaluation data and code](https://github.com/mzaghoo/najiz-closed-book-eval)
+- [Arabic legal reward reliability](https://github.com/mzaghoo/arabic-legal-reward-reliability)
+
+## Contact
+- Email: zaghoo@madena.ai
+
+This file is a navigation aid. The linked research pages contain the full methods and limitations.

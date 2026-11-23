@@ -1,0 +1,7 @@
+# Public marketing and research pages are open to crawlers.
+# This policy permits all crawlers, including training crawlers.
+# Search visibility does not require opting into model training.
+User-agent: *
+Allow: /
+
+Sitemap: https://madena.ai/sitemap.xml
