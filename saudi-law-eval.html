@@ -1,2 +1,288 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>What frontier models miss in Saudi law — Madena AI</title><meta name="description" content="Four models, 79 Arabic questions, and the case for better legal resources and more complex evaluations."><meta name="theme-color" content="#164e3e"><meta property="og:title" content="What frontier models miss in Saudi law — Madena AI"><meta property="og:description" content="Four models, 79 Arabic questions, and the case for better legal resources and more complex evaluations."><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="style.css?v=black-buttons"></head><body><a class="skip" href="#main">Skip to content</a><header><div class="wrap nav"><a class="brand" href="index.html" aria-label="Madena AI home"><span class="mark" lang="ar" aria-hidden="true">م</span>madena<small>AI</small></a><nav class="links" aria-label="Main navigation"><a class="nav-data" href="index.html#approach">Our focus</a><a href="index.html#research">Research</a><a class="button" href="mailto:zaghoo@madena.ai">Work with us</a></nav></div></header><main id="main" class="article"><a class="text-link" href="index.html#research">All research</a><h1>What frontier models miss in Saudi law.</h1><p class="deck">Basic questions reveal a knowledge gap. Realistic legal work needs a more demanding test.</p><p class="meta">Mohamed Zaghoo · Research note · November 2026</p><p>We asked four frontier models 79 practical Saudi legal questions in Arabic, without browsing. The strongest model fully answered <strong>33 of 79—about 42%</strong>. None fully answered any of the ten professional-licensing questions.</p><table><caption class="label" style="text-align:left;margin-bottom:12px">Reported Saudi-context run</caption><thead><tr><th scope="col">Model</th><th scope="col">Fully correct</th><th scope="col">Mean score</th></tr></thead><tbody><tr><td>Gemini 4 Carbon</td><td>33/79</td><td>0.591</td></tr><tr><td>GPT-6 Astra</td><td>28/79</td><td>0.504</td></tr><tr><td>Claude Opus 5.5</td><td>12/79</td><td>0.331</td></tr><tr><td>Muse Spark 1.3</td><td>11/79</td><td>0.326</td></tr></tbody></table><h2>A gap in practical knowledge</h2><p>The models knew different parts of Saudi law. Gemini performed better in enforcement and family law; Astra performed better on court fees. Licensing was difficult for all four. This supports investment in better Arabic legal resources, but does not prove the information was absent from training data.</p><p>Context mattered too. Explicitly naming Saudi Arabia raised Gemini’s mean score from 0.468 to 0.591 and Muse’s from 0.144 to 0.326 in the reported runs.</p><h2>Being wrong is not the same as abstaining</h2><p>Astra abstained on 26 questions and was graded wrong on seven of its 53 attempts. Opus abstained on six and was graded wrong on 40 of 73 attempts. Legal evaluations should distinguish an admission of uncertainty from an incorrect amount or deadline stated as fact.</p><h2>Recall is only the starting point</h2><p>The next test should ask models to find the applicable source, identify exceptions, apply the right version of a rule, and produce a useful legal document. That requires realistic case files, expert-reviewed rubrics, and evaluation on unseen cases.</p><div class="takeaway"><p><strong>Arabic legal AI needs stronger knowledge resources and harder evaluations.</strong> A better score matters when it translates into better work.</p></div><details><summary>Scope and limitations</summary><p>This is a small, Saudi-only study with different answering configurations, one model grader, one answer sample per model, and potentially dated reference answers. It measures closed-book performance, not retrieval, legal drafting, or the effect of training. The results are not a controlled ranking of general model ability. Repeated runs with matched conditions and independent legal review are needed.</p></details><p class="source">Source: <a href="https://github.com/mzaghoo/najiz-closed-book-eval">Najiz Closed-Book evaluation: results, methodology, and reproducible scoring</a>.</p></main><footer><div class="wrap"><a class="brand" href="index.html" aria-label="Madena AI home"><span class="mark" lang="ar" aria-hidden="true">م</span>madena<small>AI</small></a><span>Arabic expertise. Measurable progress.</span><span>© 2026 Madena AI</span></div></footer></body></html>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Najiz Closed-Book Results — Madena AI</title><meta name="description" content="79 Saudi legal questions, four frontier models: detailed results, Arabic examples, grading methodology, and the case for more complex legal evaluations."><link rel="icon" href="favicon.svg">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column of research-note prose, with full-width exhibits (charts, examples) that break slightly wider. */
+:root{
+  --bg:#F7F8F6; --surface:#FFFFFF; --ink:#14201C; --muted:#56635E; --rule:#DCE1DD; --soft:#EEF1EE;
+  --gemini:#009E73; --astra:#0072B2; --opus:#D55E00; --muse:#CC79A7;
+  --g-correct:#14201C; --g-partial:#8C9893; --g-wrong:#FFFFFF; --g-wrong-edge:#B9C2BD;
+  --accent:#0E6B53;
+  --sans:"IBM Plex Sans","IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --arabic:"IBM Plex Sans Arabic","Geeza Pro","Noto Naskh Arabic",Tahoma,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121816; --surface:#19211E; --ink:#E6ECE9; --muted:#9AA8A2; --rule:#2B3531; --soft:#1F2925;
+  --gemini:#2FC193; --astra:#56A8E0; --opus:#E8813A; --muse:#DB94BC;
+  --g-correct:#E6ECE9; --g-partial:#6F7C77; --g-wrong:#19211E; --g-wrong-edge:#45514C; --accent:#5CC4A2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121816; --surface:#19211E; --ink:#E6ECE9; --muted:#9AA8A2; --rule:#2B3531; --soft:#1F2925;
+  --gemini:#2FC193; --astra:#56A8E0; --opus:#E8813A; --muse:#DB94BC;
+  --g-correct:#E6ECE9; --g-partial:#6F7C77; --g-wrong:#19211E; --g-wrong-edge:#45514C; --accent:#5CC4A2; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:780px;margin:0 auto}
+.wide{max-width:980px;margin:0 auto}
+header.top{padding-block:56px 32px;border-bottom:1px solid var(--rule)}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+h1{font-size:clamp(30px,5vw,44px);line-height:1.12;font-weight:600;letter-spacing:-.015em;margin:18px 0 18px;text-wrap:balance}
+.dek{font-size:19px;color:var(--muted);margin:0;max-width:66ch}
+.byline{margin-top:22px;font-size:14px;color:var(--muted)}
+h2{font-size:24px;line-height:1.25;font-weight:600;margin:56px 0 12px;letter-spacing:-.01em;text-wrap:balance}
+h3{font-size:17px;font-weight:600;margin:28px 0 6px}
+p{margin:0 0 16px;max-width:68ch}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.d-gemini{background:var(--gemini)} .d-astra{background:var(--astra)} .d-opus{background:var(--opus)} .d-muse{background:var(--muse)}
+.who{display:inline-flex;align-items:center;gap:7px;font-weight:600;white-space:nowrap}
+.tablebox{overflow-x:auto;margin:22px 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:12.5px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:500}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+table.lead td.r{font-family:var(--mono);font-size:15.5px}
+table.lead tr.best td{font-weight:600}
+figure{margin:28px 0 8px;background:var(--surface);border:1px solid var(--rule);padding:22px 22px 16px}
+figcaption{font-size:13.5px;color:var(--muted);margin-top:12px;line-height:1.5}
+.fig-title{font-weight:600;font-size:15.5px;margin:0 0 14px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;display:inline-block;border-radius:2px}
+.grid-row{display:grid;grid-template-columns:160px minmax(0,1fr) 190px;gap:14px;align-items:center;margin:10px 0}
+.grid-row .name{font-size:14.5px}
+.cells{display:grid;grid-template-columns:repeat(40,minmax(0,1fr));gap:2px}
+.cell{aspect-ratio:1;border-radius:2px;border:1px solid transparent}
+.cell.correct{background:var(--g-correct)} .cell.partial{background:var(--g-partial)} .cell.wrong{background:var(--g-wrong);border-color:var(--g-wrong-edge)}
+.cell:hover,.cell:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.grid-row .sum{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12.5px;padding:6px 9px;border-radius:4px;max-width:260px;line-height:1.4;z-index:20}
+.svgbox{overflow-x:auto}
+svg text{fill:var(--muted);font-family:var(--sans);font-size:12.5px}
+svg .lab{fill:var(--ink);font-size:13.5px}
+svg .gridl{stroke:var(--rule)}
+.examples{display:grid;gap:18px;margin-top:20px}
+.ex{background:var(--surface);border:1px solid var(--rule);padding:20px 22px}
+.ex .q{font-family:var(--arabic);direction:rtl;text-align:right;font-size:18px;font-weight:600;line-height:1.7;margin-bottom:4px}
+.ex .qen{font-size:14px;color:var(--muted);margin-bottom:14px}
+.ans{display:grid;grid-template-columns:150px minmax(0,1fr) 78px;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--rule)}
+.ans .src{font-size:13.5px;font-weight:600}
+.ans .t{font-family:var(--arabic);direction:rtl;text-align:right;font-size:15.5px;line-height:1.75;min-width:0}
+.ans .t.en{font-family:var(--sans);direction:ltr;text-align:left;font-size:14.5px;color:var(--muted)}
+.chip{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:3px;justify-self:end;white-space:nowrap}
+.chip.correct{background:var(--g-correct);color:var(--bg)} .chip.partial{background:var(--g-partial);color:var(--bg)} .chip.wrong{border:1px solid var(--g-wrong-edge);color:var(--muted)} .chip.ref{background:var(--soft);color:var(--muted)}
+.ex .why{font-size:14px;color:var(--muted);margin-top:10px}
+ol.find{padding-left:22px;margin:0} ol.find li{margin:0 0 14px;max-width:68ch}
+ul.lim{padding-left:20px} ul.lim li{margin:0 0 8px;max-width:68ch}
+.note{border-left:3px solid var(--accent);background:var(--soft);padding:14px 18px;margin:24px 0;font-size:16px}
+.note p{margin:0}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--muted)}
+code{font-family:var(--mono);font-size:.88em;background:var(--soft);padding:1px 5px;border-radius:3px;word-break:break-all}
+@media (max-width:640px){
+  body{font-size:16px}
+  .grid-row{grid-template-columns:minmax(0,1fr)} .grid-row .sum{order:3}
+  .cells{grid-template-columns:repeat(20,minmax(0,1fr))}
+  .ans{grid-template-columns:minmax(0,1fr) auto} .ans .t{grid-column:1/-1;grid-row:2}
+  figure{padding:16px 14px 12px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<style>
+.site-nav{display:flex;align-items:center;gap:24px;padding:24px 0;border-bottom:1px solid var(--rule);font-size:14px}.site-nav a{text-decoration:none;color:var(--ink)}.site-nav .site-brand{font-size:26px;font-weight:600;letter-spacing:-1px;margin-right:auto}.site-brand small{font-size:12px;letter-spacing:0}.site-nav .contact-button{background:#000;color:#fff;padding:11px 18px;border-radius:5px}.site-nav .contact-button:hover{background:#222}.site-nav a:focus-visible{outline:3px solid #000;outline-offset:4px}header.top{padding-top:40px}.eval-steps{padding-left:22px}.eval-steps li{margin-bottom:16px}.reading-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:30px}.tablebox{max-width:100%}@media(max-width:420px){.site-nav{gap:14px;font-size:12px}.site-nav .contact-button{padding:9px 12px}.site-nav .site-brand{font-size:23px}}
+</style><nav class="site-nav wide" aria-label="Main navigation"><a class="site-brand" href="index.html">madena <small>AI</small></a><a href="index.html#research">All research</a><a class="contact-button" href="mailto:zaghoo@madena.ai">Work with us</a></nav><header class="top"><div class="wrap">
+  <div class="eyebrow"><span>Research note</span><span>Arabic legal AI</span><span>November 2026</span></div>
+  <h1>With Saudi law named, the best of four frontier models fully answered 33 of 79 basic questions</h1>
+  <p class="dek">We asked Gemini 4 Carbon, GPT-6 Astra, Claude Opus 5.5 and Muse Spark 1.3 79 short, practical questions about Saudi legal procedure, fees and licensing, from memory and without search. These are the kind of questions a court portal's help page answers. No model could reliably retrieve them, and none fully answered a single licensing question.</p>
+  <div class="byline">Mohamed Zaghoo · Questions from the public <a href="https://github.com/Thiqah/ArabLegalEval" target="_blank" rel="noopener">ArabLegalEval</a> Najiz set · Graded blind by Claude Sonnet 5.5 · <a href="https://github.com/mzaghoo/najiz-closed-book-eval" target="_blank" rel="noopener">Data and code</a></div>
+</div></header>
+
+<main class="wrap" id="main">
+  <div class="tablebox">
+    <table class="lead">
+      <thead><tr><th>Model</th><th class="r">Correct</th><th class="r">Partial</th><th class="r">Wrong / abstained</th><th class="r">Mean score</th><th class="r">«لا أعرف»</th></tr></thead>
+      <tbody id="leadTable"><tr><td>Gemini 4 Carbon</td><td class="r">33</td><td class="r">20</td><td class="r">26</td><td class="r">0.591</td><td class="r">15</td></tr><tr><td>GPT-6 Astra</td><td class="r">28</td><td class="r">18</td><td class="r">33</td><td class="r">0.504</td><td class="r">26</td></tr><tr><td>Claude Opus 5.5</td><td class="r">12</td><td class="r">21</td><td class="r">46</td><td class="r">0.331</td><td class="r">6</td></tr><tr><td>Muse Spark 1.3</td><td class="r">11</td><td class="r">20</td><td class="r">48</td><td class="r">0.326</td><td class="r">30</td></tr></tbody>
+    </table>
+  </div>
+
+  <h2>What we found</h2>
+  <ol class="find">
+    <li><strong>Simple facts are the weak point.</strong> These questions ask for a fee, a deadline or a list of conditions that a Saudi lawyer would look up in seconds. The best model was fully correct on 42% of them, and two of the four on 14–15%.</li>
+    <li><strong>Licensing is a blind spot for every model.</strong> None of the four fully answered any of the 10 licensing questions (lawyers, notaries, foreign law firms, enforcement providers). The best mean score there was 0.13.</li>
+    <li><strong>The models know different parts of Saudi law.</strong> Gemini leads on criminal procedure (0.92), enforcement (0.72) and family law (0.71). Astra leads on court fees: it recalled 8 of the 16 fee and rate amounts exactly, against 6 for Gemini and 2 each for Opus and Muse.</li>
+    <li><strong>They fail in different ways.</strong> Astra says «لا أعرف» when unsure and was wrong on only 7 of the 53 questions it attempted. Opus attempted 73 and was graded wrong on 40, including 8 wrong amounts or deadlines stated as fact. Gemini attempted 64 and was wrong on 11.</li>
+    <li><strong>Naming the jurisdiction matters.</strong> The questions never say "Saudi Arabia". Without it, Gemini and Muse often said the country was unspecified or answered in general terms. One added line raised Gemini's mean score from 0.47 to 0.59 and Muse's from 0.14 to 0.33.</li>
+  </ol>
+
+  <section class="wide">
+  <figure>
+    <p class="fig-title">Every question, graded</p>
+    <div class="legend"><span><i class="sw" style="background:var(--g-correct)"></i>Correct</span><span><i class="sw" style="background:var(--g-partial)"></i>Partial</span><span><i class="sw" style="background:var(--g-wrong);border:1px solid var(--g-wrong-edge)"></i>Wrong or «لا أعرف»</span></div>
+    <div id="grids"></div><noscript>Enable JavaScript to explore the question-level charts. Aggregate results remain available in the table above.</noscript>
+    <figcaption>One square per question, in the benchmark's order (Q1 to Q79). Hover or focus a square to see its question number and score. Correct means a rubric score of at least 0.85 with every core principle, deadline and amount present.</figcaption>
+  </figure>
+  </section>
+
+  <h2>Where the gaps are</h2>
+  <p>Licensing has the lowest category mean for all four models. Procedure categories generally perform better, while fee recall varies substantially. These author-assigned categories describe this question set; they do not establish which source documents a model encountered during training.</p>
+  <section class="wide">
+  <figure>
+    <p class="fig-title">Mean rubric score by area of law</p>
+    <div class="legend" id="dotLegend"></div>
+    <div class="svgbox"><svg id="dots" role="img" aria-label="Mean rubric score by area of law for four models"></svg></div>
+    <figcaption>Score from 0 to 1 under the rubric; n is the number of questions in each area. Where dots overlap, the table below gives the values. Areas were assigned by the author from each question's subject.</figcaption>
+  </figure>
+  </section>
+  <div class="tablebox">
+    <table>
+      <thead><tr><th>Area of law</th><th class="r">n</th><th class="r">Gemini</th><th class="r">Astra</th><th class="r">Opus</th><th class="r">Muse</th></tr></thead>
+      <tbody id="areaTable"></tbody>
+    </table>
+  </div>
+
+  <h2>Three examples</h2>
+  <p>Each example shows the benchmark reference alongside model excerpts or an explicitly marked summary. The references are the grading standard for this experiment, not independently verified statements of current law.</p>
+  <div class="examples">
+    <div class="ex">
+      <div class="q">كم تبلغ قيمة التكاليف القضائية لطلب التنفيذ المباشر؟</div>
+      <div class="qen">Q5 · What are the court costs for a direct enforcement request? Only Gemini knew.</div>
+      <div class="ans"><span class="src">Reference</span><span class="t">خمسمائة ريال.</span><span class="chip ref">Ref</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-gemini"></i>Gemini 4 Carbon</span><span class="t">… تبلغ قيمة التكاليف القضائية لطلب التنفيذ المباشر (500) خمسمائة ريال سعودي …</span><span class="chip correct">Correct</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-astra"></i>GPT-6 Astra</span><span class="t">لا أعرف</span><span class="chip wrong">Wrong</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-opus"></i>Claude Opus 5.5</span><span class="t">لا أعرف المبلغ بدقة.</span><span class="chip wrong">Wrong</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-muse"></i>Muse Spark 1.3</span><span class="t">لا أعرف</span><span class="chip wrong">Wrong</span></div>
+    </div>
+    <div class="ex">
+      <div class="q">كم يبلغ مقدار التكاليف القضائية لطلبات التنفيذ المالية؟</div>
+      <div class="qen">Q14 · What are the court costs for a financial enforcement request? Only Astra knew.</div>
+      <div class="ans"><span class="src">Reference</span><span class="t">2% من قيمة المطالبة، على ألا تقل عن خمسمائة ريال ولا تزيد على عشرة آلاف ريال.</span><span class="chip ref">Ref</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-astra"></i>GPT-6 Astra</span><span class="t">اثنين في المائة من قيمة المطالبة، بحد أدنى خمسمائة ريال وحد أقصى عشرة آلاف ريال …</span><span class="chip correct">Correct</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-gemini"></i>Gemini 4 Carbon</span><span class="t">لا أعرف.</span><span class="chip wrong">Wrong</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-opus"></i>Claude Opus 5.5</span><span class="t">لا أعرف المقدار بدقة؛ تخمين: نسبة من قيمة المطالبة يتحملها المنفذ ضده.</span><span class="chip wrong">Wrong</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-muse"></i>Muse Spark 1.3</span><span class="t">لا أعرف</span><span class="chip wrong">Wrong</span></div>
+    </div>
+    <div class="ex">
+      <div class="q">ما هي شروط الحصول على رخصة المحاماة؟</div>
+      <div class="qen">Q47 · What are the conditions for a lawyer's licence? No model got it fully right.</div>
+      <div class="ans"><span class="src">Reference</span><span class="t">… أن تتوافر لديه خبرة في طبيعة العمل لمدة لا تقل عن سنتين …</span><span class="chip ref">Ref</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-gemini"></i>Gemini 4 Carbon</span><span class="t en">Listed nationality, qualifications and good conduct, but left out the two-year experience requirement.</span><span class="chip partial">Partial</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-astra"></i>GPT-6 Astra</span><span class="t">لا أعرف</span><span class="chip wrong">Wrong</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-opus"></i>Claude Opus 5.5</span><span class="t">… خبرة عملية (ثلاث سنوات أو أقل لحملة الدراسات العليا) …</span><span class="chip wrong">Wrong</span></div>
+      <div class="ans"><span class="src who"><i class="dot d-muse"></i>Muse Spark 1.3</span><span class="t">… ولديه الخبرة العملية المطلوبة أو التدريب المهني …</span><span class="chip wrong">Wrong</span></div>
+      <div class="why">Opus gave the experience requirement as three years instead of two, and a wrong period cuts the score by 70%. Muse mentioned experience without a period.</div>
+    </div>
+  </div>
+
+  <h2>What the low scores establish—and what they do not</h2>
+  <p>These are short factual questions, rather than end-to-end legal reasoning tasks. The results reveal a practical recall gap against the benchmark’s references: naming the jurisdiction did not make any model consistently correct. Arabic fluency alone is not evidence that a model can supply the right legal condition, amount or deadline.</p>
+  <p>Limited coverage of Saudi legal material in training is one possible explanation. Other explanations include outdated knowledge, difficulty retrieving learned facts, prompt sensitivity and imperfections in the reference answers. This study does not inspect training corpora, isolate the effect of Arabic, or establish the cause of the gap.</p>
+  <p>The uneven strengths nevertheless give data builders a concrete agenda: preserve jurisdiction, source provenance and effective dates; represent exceptions explicitly; and evaluate precise amounts and periods separately from plausible prose. Whether additional data improves a model must then be tested on unseen material.</p>
+  <div class="note"><p><strong>Recall and reliability are different measurements.</strong> An abstention receives a low benchmark score, but it is not the same failure as an incorrect answer presented with certainty. Report both coverage and errors among attempted answers.</p></div>
+
+  <h2>How the models were run</h2>
+  <p>All four answered the same 79 questions in Arabic, closed-book, with the same core instructions: no browsing, tools or files; do not invent laws, amounts, article numbers or citations; say «لا أعرف» if unsure; at most 150 words. How each model learned that the questions concern Saudi law differed:</p>
+  <div class="tablebox"><table>
+    <thead><tr><th>Model</th><th>How it ran</th><th>Saudi context</th></tr></thead>
+    <tbody>
+      <tr><td><span class="who"><i class="dot d-gemini"></i>Gemini 4 Carbon</span></td><td>OpenRouter API, one call per question, default settings</td><td>One added instruction: <span dir="rtl" style="font-family:var(--arabic)">«أجب وفق الأنظمة المعمول بها في المملكة العربية السعودية»</span></td></tr>
+      <tr><td><span class="who"><i class="dot d-muse"></i>Muse Spark 1.3</span></td><td>OpenRouter API, one call per question, default settings</td><td>The same added instruction</td></tr>
+      <tr><td><span class="who"><i class="dot d-astra"></i>GPT-6 Astra</span></td><td>Codex, high reasoning effort, all 79 in one session</td><td>Implicit: the question file was named after Najiz, the Saudi Ministry of Justice portal</td></tr>
+      <tr><td><span class="who"><i class="dot d-opus"></i>Claude Opus 5.5</span></td><td>A Claude session already working on Saudi law, all 79 in one pass</td><td>Implicit: the session's prior work was on Saudi law and this benchmark</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>How we graded</h2>
+  <p>We broke each reference answer into 270 required elements in total and weighted them by type:</p>
+  <div class="tablebox"><table>
+    <thead><tr><th>Element</th><th class="r">Weight</th></tr></thead>
+    <tbody>
+      <tr><td>Core principle</td><td class="r">3</td></tr>
+      <tr><td>Deadline, period or term</td><td class="r">2</td></tr>
+      <tr><td>Amount, rate or payment</td><td class="r">2</td></tr>
+      <tr><td>Condition, exception or detail</td><td class="r">1</td></tr>
+      <tr><td>One item in an enumerated list</td><td class="r">1</td></tr>
+    </tbody>
+  </table></div>
+  <p>An answer that contradicts the reference scores 0. A wrong amount or timeline multiplies the score by 0.3. A wrong citation costs 2 points. Correct means a score of at least 0.85 with every core principle, deadline and amount present; partial means at least 0.40.</p>
+  <p>Claude Sonnet 5.5 graded all four answer sets one question at a time, at temperature 0. For each question it saw the reference, the rubric elements and the four answers labelled A–D in a fresh random order; the key never reached it. We recomputed all 316 scores from its element-by-element calls and found no arithmetic errors.</p>
+
+  <h2>Limitations</h2>
+  <ul class="lim">
+    <li><strong>Saudi context was not delivered identically.</strong> Gemini and Muse received one explicit instruction; Astra and Opus had implicit context of different strength. The answering setups also differed.</li>
+    <li><strong>One grader.</strong> Sonnet 5.5 is from the same family as Opus 5.5. Shared model lineage is a potential source of bias; its direction and size have not been established. No lawyer has reviewed the grader’s close calls.</li>
+    <li><strong>Grading noise.</strong> Astra's and Opus's unchanged answers were graded in two separate runs; their mean scores moved by up to 0.03. This observed variation cautions against interpreting small score differences; it is not a statistical significance threshold.</li>
+    <li><strong>One sample per model.</strong> Answers vary between runs, so a single run cannot separate ability from chance.</li>
+    <li><strong>Small and Saudi-only.</strong> 79 questions, mostly procedure and fees, from one portal. The results do not cover other Arab jurisdictions or legal drafting.</li>
+    <li><strong>Reference answers are the standard.</strong> A few reference answers do not directly answer their question, and some may be out of date.</li>
+    <li><strong>Possible contamination.</strong> The benchmark has been public since 2024 and may be in any model's training data.</li>
+    <li><strong>Closed-book only.</strong> The effect of supplying context passages has not been measured in these results. This run evaluates recall under the stated conditions, not source retrieval or reading supplied evidence.</li>
+  </ul>
+
+  <h2>Why Arabic legal AI needs more complex evaluations</h2>
+  <p>Getting a short answer right is necessary for some workflows, but insufficient for legal work. A system can recall a fee and still choose the wrong procedure, miss a material exception, rely on a superseded rule or draft an unsupported conclusion. Conversely, a model that abstains from memory may perform well when it can consult authoritative sources. Neither outcome is measured here.</p>
+  <p>A next-stage benchmark should use realistic, expert-reviewed case files and test a sequence of decisions with observable outputs:</p>
+  <ol class="eval-steps">
+    <li><strong>Establish the case.</strong> Extract parties, dates, claims and missing facts from Arabic documents. Ask a targeted clarification when the record is insufficient.</li>
+    <li><strong>Find the applicable authority.</strong> Retrieve the relevant rule, check jurisdiction and effective date, and distinguish primary authority from commentary or an obsolete version.</li>
+    <li><strong>Apply the rule.</strong> Connect evidence to each legal condition, handle exceptions, and calculate amounts or deadlines with explicit assumptions.</li>
+    <li><strong>Produce a usable work product.</strong> Draft a memorandum, procedural checklist or filing supported by traceable citations. Distinguish established facts from allegations and unresolved questions.</li>
+    <li><strong>Respond to changed evidence.</strong> Revise the recommendation when a date, document or jurisdiction changes, without retaining conclusions that no longer follow.</li>
+  </ol>
+  <p>The scoring should examine both the final answer and the observable work that produced it: retrieved sources, calculations, intermediate artifacts and revisions. A polished memo should not compensate for a decisive error in the applicable law. Expert rubrics should identify critical failures as well as partial credit.</p>
+  <p>Compare closed-book, supplied-context and retrieval-enabled settings separately. Use repeated runs under matched conditions, independent legal review and a grader checked against human judgments. Hold out entire cases and closely related variants, rather than letting steps from the same case appear in both training and evaluation.</p>
+  <div class="note"><p><strong>The target is transfer to unfamiliar legal work.</strong> A score increase on exposed questions is not enough. Better Arabic legal data should improve performance on held-out cases, with fewer unsupported claims and more appropriate requests for evidence.</p></div>
+  <p>These are proposed evaluation requirements, not capabilities or training improvements demonstrated by the 79-question experiment. Our <a href="arabic-legal-rewards.html">Arabic legal reward-reliability study</a> addresses the complementary problem: whether the evaluator itself rewards the right behavior.</p>
+
+  <h2>Next</h2>
+  <p>We plan to run the same questions with the benchmark's context passages, take several samples per model with identical instructions and settings, add a second grader from a different model family, and have a Saudi lawyer review the disputed grades.</p>
+
+  <footer><p>Results and examples adapted from the supplied Najiz Closed-Book Results research note. The reported setups differ, so this is not a controlled ranking of general model ability.</p>
+    Answer files (SHA-256): Gemini <code>9ae3c835…</code>, Astra <code>756d706e…</code>, Opus <code>dea83df4…</code>, Muse <code>93404657…</code>. Rubric <code>68e1aaf5…</code>. All files and a verification script are at <a href="https://github.com/mzaghoo/najiz-closed-book-eval" target="_blank" rel="noopener">github.com/mzaghoo/najiz-closed-book-eval</a>. Model names describe the requested settings. No endorsement by any model provider or by the benchmark's authors is implied.
+<div class="reading-links"><a href="index.html#research">All Madena research</a><a href="mailto:zaghoo@madena.ai">Discuss this research</a></div>  </footer>
+</main>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const DATA = {"models": [{"key": "gemini", "name": "Gemini 4 Carbon", "c": 33, "p": 20, "w": 26, "mean": 0.591, "idk": 15, "labels": ["correct", "correct", "wrong", "wrong", "correct", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "wrong", "wrong", "wrong", "correct", "correct", "correct", "correct", "correct", "correct", "wrong", "correct", "partial", "correct", "partial", "partial", "correct", "wrong", "partial", "partial", "correct", "correct", "wrong", "wrong", "correct", "correct", "correct", "wrong", "wrong", "partial", "partial", "correct", "correct", "correct", "partial", "wrong", "partial", "partial", "wrong", "partial", "wrong", "correct", "wrong", "wrong", "wrong", "correct", "correct", "correct", "partial", "partial", "partial", "partial", "correct", "wrong", "partial", "correct", "correct", "correct", "correct", "correct", "wrong", "correct", "partial", "partial", "partial", "partial", "correct", "wrong", "wrong"], "scores": [1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.8, 0.857, 0.5, 0.75, 1.0, 0.0, 0.833, 0.75, 1.0, 1.0, 0.0, 0.138, 1.0, 1.0, 1.0, 0.0, 0.0, 0.667, 0.75, 0.857, 0.857, 1.0, 0.5, 0.0, 0.5, 0.667, 0.125, 0.571, 0.15, 1.0, 0.0, 0.0, 0.0, 0.857, 1.0, 1.0, 0.429, 0.75, 0.6, 0.833, 1.0, 0.0, 0.6, 1.0, 1.0, 1.0, 1.0, 1.0, 0.333, 1.0, 0.5, 0.667, 0.714, 0.75, 1.0, 0.375, 0.0]}, {"key": "astra", "name": "GPT-6 Astra", "c": 28, "p": 18, "w": 33, "mean": 0.504, "idk": 26, "labels": ["wrong", "partial", "wrong", "wrong", "wrong", "wrong", "wrong", "correct", "correct", "correct", "wrong", "wrong", "wrong", "correct", "correct", "correct", "correct", "correct", "partial", "correct", "correct", "correct", "correct", "partial", "wrong", "wrong", "correct", "wrong", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "partial", "partial", "correct", "wrong", "wrong", "partial", "partial", "correct", "correct", "correct", "correct", "wrong", "wrong", "wrong", "wrong", "wrong", "partial", "correct", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "correct", "partial", "partial", "partial", "correct", "wrong", "partial", "correct", "correct", "partial", "correct", "correct", "correct", "partial", "partial", "partial", "partial", "wrong", "wrong", "partial", "wrong"], "scores": [0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.75, 1.0, 1.0, 1.0, 1.0, 0.429, 0.375, 0.0, 1.0, 0.0, 0.0, 0.167, 0.0, 0.857, 0.0, 0.0, 0.8, 0.833, 0.889, 0.0, 0.0, 0.833, 0.75, 0.857, 0.857, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, 1.0, 0.0, 0.0, 0.0, 0.857, 0.0, 0.0, 0.857, 0.75, 0.6, 0.833, 1.0, 0.0, 0.6, 1.0, 1.0, 0.75, 1.0, 1.0, 1.0, 0.6, 0.5, 0.667, 0.429, 0.0, 0.0, 0.625, 0.0]}, {"key": "opus", "name": "Claude Opus 5.5", "c": 12, "p": 21, "w": 46, "mean": 0.331, "idk": 6, "labels": ["wrong", "partial", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "wrong", "partial", "partial", "wrong", "correct", "partial", "wrong", "wrong", "partial", "correct", "partial", "partial", "partial", "partial", "wrong", "wrong", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "wrong", "partial", "correct", "wrong", "correct", "correct", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "partial", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "partial", "wrong", "partial", "partial", "wrong", "wrong", "partial", "correct", "correct", "wrong", "wrong", "partial", "correct", "partial", "partial", "partial", "partial", "wrong", "wrong", "partial", "wrong"], "scores": [0.0, 0.625, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.75, 0.8, 0.0, 0.875, 0.6, 0.0, 0.375, 0.75, 1.0, 0.5, 0.5, 0.417, 0.5, 0.0, 0.0, 0.0, 0.2, 0.0, 0.889, 0.333, 0.0, 0.25, 0.75, 0.857, 0.286, 1.0, 1.0, 0.0, 0.037, 0.0, 0.0, 0.143, 0.3, 0.667, 0.0, 0.0, 0.0, 0.857, 0.0, 0.0, 0.429, 0.0, 0.6, 0.5, 0.0, 0.129, 0.6, 1.0, 1.0, 0.0, 0.0, 0.8, 1.0, 0.6, 0.5, 0.667, 0.429, 0.0, 0.0, 0.625, 0.0]}, {"key": "muse", "name": "Muse Spark 1.3", "c": 11, "p": 20, "w": 48, "mean": 0.326, "idk": 30, "labels": ["wrong", "partial", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "correct", "wrong", "wrong", "correct", "partial", "partial", "wrong", "correct", "partial", "correct", "wrong", "partial", "correct", "wrong", "partial", "partial", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "partial", "partial", "wrong", "wrong", "partial", "correct", "wrong", "partial", "correct", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "wrong", "partial", "correct", "wrong", "wrong", "partial", "wrong", "partial", "partial", "partial", "wrong", "partial", "correct", "correct", "partial", "wrong", "correct", "wrong", "partial", "wrong", "partial", "wrong", "wrong", "wrong", "wrong", "wrong"], "scores": [0.0, 0.75, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.75, 0.8, 0.0, 0.875, 0.4, 0.857, 0.375, 0.75, 1.0, 0.0, 0.833, 0.667, 0.0, 0.0, 0.0, 0.154, 0.0, 0.0, 0.778, 0.667, 0.0, 0.0, 0.75, 1.0, 0.286, 0.5, 1.0, 0.0, 0.125, 0.0, 0.0, 0.286, 0.0, 0.0, 0.0, 0.0, 0.75, 0.857, 0.0, 0.0, 0.429, 0.0, 0.6, 0.5, 0.8, 0.0, 0.6, 1.0, 1.0, 0.75, 0.25, 1.0, 0.0, 0.6, 0.0, 0.667, 0.0, 0.0, 0.0, 0.375, 0.0]}], "areas": [{"name": "Civil & commercial procedure", "n": 11, "mean": {"gemini": 0.77, "astra": 0.77, "opus": 0.7, "muse": 0.65}}, {"name": "Criminal procedure", "n": 6, "mean": {"gemini": 0.92, "astra": 0.71, "opus": 0.49, "muse": 0.42}}, {"name": "Court fees & judicial costs", "n": 27, "mean": {"gemini": 0.49, "astra": 0.61, "opus": 0.23, "muse": 0.23}}, {"name": "Enforcement", "n": 16, "mean": {"gemini": 0.72, "astra": 0.48, "opus": 0.35, "muse": 0.34}}, {"name": "Family & personal status", "n": 8, "mean": {"gemini": 0.71, "astra": 0.34, "opus": 0.37, "muse": 0.41}}, {"name": "Licensing: lawyers, notaries, providers", "n": 10, "mean": {"gemini": 0.13, "astra": 0.0, "opus": 0.06, "muse": 0.12}}, {"name": "Other: waqf documentation", "n": 1, "mean": {"gemini": 0.75, "astra": 0.0, "opus": 0.0, "muse": 0.0}}]};
+(function(){
+  const M = DATA.models;
+  const tip=document.getElementById('tip');
+  function show(e,txt){tip.textContent=txt;tip.hidden=false;const r=e.target.getBoundingClientRect();
+    tip.style.left=Math.min(window.innerWidth-tip.offsetWidth-8,Math.max(8,r.left+r.width/2-tip.offsetWidth/2))+'px';
+    tip.style.top=Math.max(8,r.top-tip.offsetHeight-8)+'px';}
+  function hide(){tip.hidden=true}
+  function bind(el,t){el.addEventListener('mouseenter',e=>show(e,t));el.addEventListener('focus',e=>show(e,t));el.addEventListener('mouseleave',hide);el.addEventListener('blur',hide);}
+  const who=m=>`<span class="who"><i class="dot d-${m.key}"></i>${m.name}</span>`;
+  document.getElementById('leadTable').innerHTML=M.map((m,i)=>`<tr class="${i===0?'best':''}"><td>${who(m)}</td><td class="r">${m.c}</td><td class="r">${m.p}</td><td class="r">${m.w}</td><td class="r">${m.mean.toFixed(3)}</td><td class="r">${m.idk}</td></tr>`).join('');
+  const g=document.getElementById('grids');
+  M.forEach(m=>{
+    const row=document.createElement('div');row.className='grid-row';
+    row.innerHTML=`<div class="name">${who(m)}</div><div class="cells" role="list"></div><div class="sum">${m.c} correct · ${m.p} partial · ${m.w} wrong</div>`;
+    const cells=row.querySelector('.cells');
+    m.labels.forEach((lab,i)=>{const d=document.createElement('div');d.className='cell '+lab;d.tabIndex=0;d.setAttribute('role','listitem');
+      const t=`${m.name} · Q${i+1}: ${lab}, score ${m.scores[i].toFixed(2)}`;d.setAttribute('aria-label',t);bind(d,t);cells.appendChild(d)});
+    g.appendChild(row);
+  });
+  document.getElementById('dotLegend').innerHTML=M.map(m=>`<span>${who(m)}</span>`).join('');
+  const svg=document.getElementById('dots'), A=DATA.areas, W=900, left=320, right=40, top=20, rowH=40, H=top+A.length*rowH+30;
+  svg.setAttribute('viewBox',`0 0 ${W} ${H}`); svg.style.minWidth='600px'; svg.style.width='100%';
+  const x=v=>left+v*(W-left-right); const ns='http://www.w3.org/2000/svg';
+  const el=(n,a,txt)=>{const e=document.createElementNS(ns,n);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
+  [0,.25,.5,.75,1].forEach(v=>{el('line',{x1:x(v),x2:x(v),y1:top-8,y2:H-26,class:'gridl','stroke-width':1});el('text',{x:x(v),y:H-8,'text-anchor':'middle'},v.toFixed(2))});
+  A.forEach((a,i)=>{const y=top+i*rowH+rowH/2; const vals=M.map(m=>a.mean[m.key]);
+    el('text',{x:0,y:y+5,class:'lab'},a.name); el('text',{x:left-14,y:y+5,'text-anchor':'end'},'n='+a.n);
+    el('line',{x1:x(Math.min(...vals)),x2:x(Math.max(...vals)),y1:y,y2:y,stroke:'var(--rule)','stroke-width':3});
+    M.slice().reverse().forEach(m=>{const c=el('circle',{cx:x(a.mean[m.key]),cy:y,r:7,fill:`var(--${m.key})`,stroke:'var(--surface)','stroke-width':2,tabindex:0});
+      bind(c,`${m.name} · ${a.name}: ${a.mean[m.key].toFixed(2)}`);});
+  });
+  document.getElementById('areaTable').innerHTML=A.map(a=>{const best=Math.max(...M.map(m=>a.mean[m.key]));
+    return `<tr><td>${a.name}</td><td class="r">${a.n}</td>`+['gemini','astra','opus','muse'].map(k=>`<td class="r" style="${a.mean[k]===best?'font-weight:600':''}">${a.mean[k].toFixed(2)}</td>`).join('')+'</tr>'}).join('');
+})();
+</script>
+
+</body></html>
