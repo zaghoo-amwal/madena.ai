@@ -1,78 +1,11 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Madena AI — Arabic Alignment Lab</title>
-    <meta name="description" content="Building the next generation of Arabic datasets, reward models, and evaluations—so AGI understands the people who speak it." />
-    <!-- Favicon pref: file; fallback: inline -->
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAABl0lEQVR4nO2WsYrCQBCGJ+GaoEUKURAEy4BdGitLOwvBRh9BQQt7H8TKwiLvIOIL+ASiUSxsBbUKLP7XnIW34bxL9hgD88E2O5vM/8FushYRgTKMzR0gLSLAjQhwIwLciAA3IsCNCHAjAtyIADciwM3Hf768Wq2S53nkOA7dbjfabrd0PB6N94HpUS6XsVqtEMd6vUaj0TDZz2z4QqGA3W4XG/6BUgrdbvc9BYIg+DH8g8vlAtd130vAdV0opZ6CLhYL+L6P6XSqSbTb7fcRsG0bnU5HC9nr9UBEKBaLWm00GqXum/orlM/naTAY0Hg8plKppNX7/T55nkfNZlOrKaXStieiFPaVSgVhGP5qz3/nfr+jVqvxbqH5fJ44/GQyMXX2kj98Pp+1cK1WC8PhEMvlEqfTCVEUAQCiKEIYhpjNZqjX66bCJxfI5XJa+P1+H7vWsiyTgZ9G4ruQ4zja3PV6jV0LIGmbl2T+MicC3IgAN4mvEkop2mw2T3OHwyF1oL9i0dfPIKtkfguJADciwI0IcCMC3HwCDmrmTF2XRAoAAAAASUVORK5CYII=" />
-    <link rel="apple-touch-icon" href="favicon.png" />
-    <!-- Open Graph / Twitter -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Madena AI — Arabic Alignment Lab" />
-    <meta property="og:description" content="Data &amp; Models for the Arabic Internet." />
-    <meta property="og:image" content="og-preview.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Madena AI — Arabic Alignment Lab" />
-    <meta name="twitter:description" content="Building the next generation of Arabic datasets, reward models, and evaluations—so AGI understands the people who speak it." />
-    <meta name="twitter:image" content="og-preview.png" />
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>html{scroll-behavior:smooth}</style>
-  </head>
-  <body class="min-h-screen bg-white text-gray-900 flex flex-col text-left">
-    <header class="sticky top-0 z-20 backdrop-blur bg-white/70 border-b border-slate-200">
-      <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div class="h-9 w-9 rounded-xl bg-black text-white grid place-items-center font-bold" aria-label="Madena AI logo">م</div>
-          <span class="font-semibold tracking-tight text-xl">Madena AI</span>
-          <span class="ml-2 rounded-full bg-slate-100 text-slate-700 px-2.5 py-1 text-[0.6rem] md:text-xs">Arabic Alignment Lab</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <a class="inline-flex items-center justify-center rounded-xl bg-black text-white px-4 py-2 text-sm font-medium hover:opacity-90" href="mailto:partnerships@madena.ai">Work with us</a>
-        </div>
-      </div>
-    </header>
-    <main class="flex-1" id="home">
-      <section class="mx-auto max-w-7xl px-6 pt-16 pb-10 md:pt-24 md:pb-12">
-        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">Data &amp; Models for the Arabic Internet</h1>
-        <p class="mt-5 text-lg md:text-xl text-gray-700 max-w-2xl">Building the next generation of Arabic datasets, reward models, and evaluations—so AGI understands the people who speak it.</p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a class="inline-flex items-center rounded-2xl bg-black text-white px-5 py-3 text-sm md:text-base font-medium hover:opacity-90" href="mailto:partnerships@madena.ai">Get in touch</a>
-        </div>
-      </section>
-      <section class="mx-auto max-w-4xl px-6 pb-12 md:pb-16" id="mission">
-        <div class="text-base text-gray-800">
-          <p>The Arabic language is a living testament to the human imagination. It is the official language for 500 M people, and a medium for spiritual, theological and legal inspirations for more than 1.5 Bn people.</p>
-          <p class="mt-6">Its script inspired, and still adorns, some of the world’s greatest architectural marvels such as Taj Mahal and Alhambra palace, all while preserving the words of Rumi, Hafez and Gibran. A tongue for mystics, scholars, and a script with calligraphic beauty and precision.</p>
-          <p class="mt-6">Yet in the race to develop universal AGI, its datasets are the one of the most lacking and currently trivialized. Madena AI bridges this gap, employing physicists, computer scientists, linguists and lawyers from a diverse background of native arabic speakers to develop the next generation data, evaluations and models for arabic.</p>
-        </div>
-      </section>
-    </main>
-    <section class="bg-slate-50 border-t border-slate-200 px-6 py-12 mt-10" id="partner">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4">Partner with us</h2>
-        <p class="text-gray-700 mb-6">Join Madena AI to co‑develop Arabic datasets, RLHF pipelines, and evaluation suites for your models. Collaborate with experts in data, language, and alignment.</p>
-        <a href="mailto:partnerships@madena.ai" class="inline-block bg-black text-white px-6 py-3 rounded-xl text-sm md:text-base font-medium hover:opacity-90">Get in touch</a>
-      </div>
-    </section>
-    <footer class="border-t border-slate-200 bg-white/60">
-      <div class="mx-auto max-w-7xl px-6 py-10 flex flex-col md:flex-row items-start justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="h-8 w-8 rounded-lg bg-black text-white grid place-items-center font-bold">م</div>
-          <span class="text-sm text-gray-600">© <span id="year"></span> Madena AI — Arabic Alignment Lab</span>
-        </div>
-        <div class="text-sm text-gray-600 flex items-center gap-4">
-          <a href="#mission" class="hover:text-black">Why Arabic</a>
-          <a href="#partner" class="hover:text-black">Partner with us</a>
-          <a href="mailto:partnerships@madena.ai" class="hover:text-black">Contact</a>
-        </div>
-      </div>
-    </footer>
-    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  </body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Madena AI — Arabic expertise for frontier models</title><meta name="description" content="Arabic datasets, legal evaluations, and RL research. Explore Madena’s work on Saudi legal knowledge and Arabic reward reliability."><meta name="theme-color" content="#164e3e"><meta property="og:title" content="Madena AI — Arabic expertise for frontier models"><meta property="og:description" content="Arabic datasets, legal evaluations, and RL research. Explore Madena’s work on Saudi legal knowledge and Arabic reward reliability."><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="style.css?v=black-buttons"></head><body><a class="skip" href="#main">Skip to content</a><header><div class="wrap nav"><a class="brand" href="index.html" aria-label="Madena AI home"><span class="mark" lang="ar" aria-hidden="true">م</span>madena<small>AI</small></a><nav class="links" aria-label="Main navigation"><a class="nav-data" href="index.html#approach">Our focus</a><a href="index.html#research">Research</a><a class="button" href="mailto:zaghoo@madena.ai">Work with us</a></nav></div></header><main id="main"><section class="wrap hero"><div><p class="label">Arabic alignment lab</p><h1>Better data.<br>Deeper context.<br><em>Arabic intelligence.</em></h1><p class="lede">We’re building Arabic datasets, evaluations, and RL tasks for models that need to do more than sound right.</p><div class="actions"><a class="button" href="mailto:zaghoo@madena.ai?subject=Madena%20research%20partnership">Build with us</a><a class="button secondary" href="#research">Explore the research</a></div></div><div class="hero-art"><img src="mesh-transparent.svg" width="550" height="440" alt="Curved green geometric mesh on a transparent background"></div></section>
+<div class="wrap thesis"><span class="label">Our starting point</span><p>Fluency is not expertise.<br>Good judgment needs context—and a better test.</p></div>
+<section class="wrap section" id="approach"><div class="section-head"><div><p class="label">What we’re building</p><h2>From legal knowledge<br>to work that holds up.</h2></div><p>Starting with Arabic legal AI.<br>Built around evidence, expert judgment, and meaningful evaluation.</p></div><div class="offerings">
+<article class="offering"><svg class="icon" viewBox="0 0 36 36" aria-hidden="true"><path d="M8 4h15l5 5v23H8zM22 4v7h6M13 16h10M13 21h10M13 26h6"/></svg><h3>Data with context</h3><p>Legal scenarios grounded in jurisdiction, dated sources, and the decisions a professional actually makes.</p></article>
+<article class="offering"><svg class="icon" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="m11 18 5 5 10-11"/></svg><h3>Rewards that mean more</h3><p>Rubrics and verifiers designed to distinguish substantive mistakes from valid Arabic phrasing.</p></article>
+<article class="offering"><svg class="icon" viewBox="0 0 36 36" aria-hidden="true"><path d="M5 29h26M8 25V15h5v10M17 25V9h5v16M26 25V4h5v21"/></svg><h3>Harder, useful evaluations</h3><p>Moving beyond recall toward research, drafting, and multi-step legal work—with unseen cases to test progress.</p></article></div></section>
+<section class="research" id="research"><div class="wrap section"><div class="section-head"><div><p class="label">Research notes</p><h2>Find the gap.<br>Question the score.</h2></div><p>Two studies shaping our approach to Arabic legal intelligence.</p></div><div class="research-grid">
+<article class="research-card"><a class="chart chart-link" href="saudi-law-eval.html" aria-label="Read the Saudi legal evaluation research note"><span class="label">Saudi legal recall · fully correct</span><div class="mini-bars"><div class="bar"><span>Gemini</span><div class="track"><div class="fill" style="width:41.77%"></div></div><span>33/79</span></div><div class="bar"><span>Astra</span><div class="track"><div class="fill" style="width:35.44%"></div></div><span>28/79</span></div><div class="bar"><span>Opus</span><div class="track"><div class="fill" style="width:15.19%"></div></div><span>12/79</span></div><div class="bar"><span>Muse</span><div class="track"><div class="fill" style="width:13.92%"></div></div><span>11/79</span></div></div><span class="chart-foot">79 questions · four models · reported closed-book run</span></a><div class="content"><span class="label">Knowledge &amp; evaluation</span><h3>What frontier models miss in Saudi law.</h3><p>The strongest model fully answered 33 of 79 questions. A reason to improve Arabic legal resources—and build harder tests.</p><a class="text-link" href="saudi-law-eval.html">Read the research note</a></div></article>
+<article class="research-card"><a class="chart chart-link" href="arabic-legal-rewards.html" aria-label="Read the Arabic legal reward reliability research note"><span class="label">Compliant sentences wrongly penalised</span><div class="comparison"><div><strong class="before">7/17</strong><span>Original checker</span></div><div class="divider"></div><div><strong class="after">0/17</strong><span>Revised checker</span></div></div><span class="chart-foot">Small held-out sentence set · combined checker revision</span></a><div class="content"><span class="label">Reward reliability</span><h3>Better answers need better judges.</h3><p>Can a legal evaluator tell a mistake from a valid variation? Our Arabic study examines the evidence behind the reward.</p><a class="text-link" href="arabic-legal-rewards.html">Read the research note</a></div></article></div></div></section>
+<section class="wrap closing" id="contact"><div><p class="label">For research teams &amp; domain experts</p><h2 style="margin-top:16px">Bring us a hard problem.</h2><p>Let’s define the cases, evidence, and evaluations your Arabic models need next.</p></div><div class="actions"><a class="button" href="mailto:zaghoo@madena.ai">Start a conversation</a></div></section></main><footer><div class="wrap"><a class="brand" href="index.html" aria-label="Madena AI home"><span class="mark" lang="ar" aria-hidden="true">م</span>madena<small>AI</small></a><span>Arabic expertise. Measurable progress.</span><span>© 2026 Madena AI</span></div></footer></body></html>
