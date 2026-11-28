@@ -9,6 +9,8 @@
 - [Saudi legal AI evaluation](https://madena.ai/saudi-law-eval.html): A closed-book study of four models on 79 Najiz questions. Includes methods, examples, and limitations; results should not be generalized beyond the reported evaluation.
 - [Arabic legal reward reliability](https://madena.ai/arabic-legal-rewards.html): Verifier validation and expert rubric sensitivity, with a small held-out test and explicit limits on reproducibility.
 
+- [ADGM Legal Bench](https://madena.ai/adgm-legal-bench.html): An exploratory pilot with 11 legal assignments and 144 source-linked rubric criteria across six judgments. Includes sample grading, limitations, and a proposed design partnership; independent legal review is pending.
+
 ## Public research repositories
 - [Najiz evaluation data and code](https://github.com/mzaghoo/najiz-closed-book-eval)
 - [Arabic legal reward reliability](https://github.com/mzaghoo/arabic-legal-reward-reliability)
